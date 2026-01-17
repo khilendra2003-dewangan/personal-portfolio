@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Dark luxury theme */
+    --background: 0 0% 4%;
+    --foreground: 45 20% 95%;
+
+    --card: 0 0% 8%;
+    --card-foreground: 45 20% 95%;
+
+    --popover: 0 0% 8%;
+    --popover-foreground: 45 20% 95%;
+
+    /* Premium Champagne Gold primary */
+    --primary: 40 35% 65%;
+    --primary-foreground: 0 0% 4%;
+
+    /* Dark charcoal secondary */
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 40 15% 90%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 40 8% 60%;
+
+    /* Rose Gold accent */
+    --accent: 15 45% 70%;
+    --accent-foreground: 0 0% 4%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 40 20% 25%;
+    --input: 0 0% 15%;
+    --ring: 40 35% 65%;
+
+    --radius: 0.75rem;
+
+    /* Premium luxury color palette */
+    --champagne-gold: 40 35% 65%;
+    --champagne-light: 42 40% 75%;
+    --champagne-dark: 38 30% 50%;
+    --rose-gold: 15 45% 70%;
+    --rose-gold-light: 15 50% 80%;
+    --platinum: 210 15% 85%;
+    --platinum-dark: 210 10% 70%;
+    --charcoal: 0 0% 8%;
+    --charcoal-deep: 0 0% 4%;
+    --glass: 0 0% 100% / 0.05;
+    --glass-border: 40 20% 40% / 0.2;
+    --glow-champagne: 40 50% 70% / 0.3;
+    --glow-rose: 15 60% 75% / 0.25;
+
+    /* Premium Gradients */
+    --gradient-champagne: linear-gradient(135deg, hsl(40 35% 65%), hsl(42 40% 75%));
+    --gradient-rose-gold: linear-gradient(135deg, hsl(15 45% 70%), hsl(15 50% 80%));
+    --gradient-luxury: linear-gradient(135deg, hsl(40 35% 65%), hsl(15 45% 70%), hsl(210 15% 85%));
+    --gradient-dark: linear-gradient(180deg, hsl(0 0% 8%), hsl(0 0% 4%));
+    --gradient-glass: linear-gradient(135deg, hsl(0 0% 100% / 0.08), hsl(0 0% 100% / 0.02));
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 4% / 0.9), hsl(0 0% 8% / 0.7));
+
+    /* Premium Shadows */
+    --shadow-champagne: 0 0 30px hsl(40 50% 70% / 0.2);
+    --shadow-champagne-soft: 0 4px 20px hsl(40 50% 70% / 0.15);
+    --shadow-rose: 0 0 25px hsl(15 60% 75% / 0.2);
+    --shadow-dark: 0 10px 40px hsl(0 0% 0% / 0.5);
+    --shadow-glass: 0 8px 32px hsl(0 0% 0% / 0.3);
+
+    --sidebar-background: 0 0% 8%;
+    --sidebar-foreground: 45 20% 90%;
+    --sidebar-primary: 43 74% 49%;
+    --sidebar-primary-foreground: 0 0% 4%;
+    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent-foreground: 45 20% 90%;
+    --sidebar-border: 43 30% 20%;
+    --sidebar-ring: 43 74% 49%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer utilities {
+  .text-gradient-champagne {
+    background: linear-gradient(135deg, hsl(40 35% 65%), hsl(42 40% 75%), hsl(15 45% 70%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-rose {
+    background: linear-gradient(135deg, hsl(15 45% 70%), hsl(15 50% 80%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-glass {
+    background: linear-gradient(135deg, hsl(0 0% 100% / 0.08), hsl(0 0% 100% / 0.02));
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(40 20% 40% / 0.2);
+  }
+
+  .bg-glass-dark {
+    background: linear-gradient(135deg, hsl(0 0% 0% / 0.4), hsl(0 0% 0% / 0.2));
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(40 20% 40% / 0.15);
+  }
+
+  .glow-champagne {
+    box-shadow: 0 0 30px hsl(40 50% 70% / 0.2);
+  }
+
+  .glow-champagne-soft {
+    box-shadow: 0 4px 20px hsl(40 50% 70% / 0.15);
+  }
+
+  .shadow-champagne {
+    box-shadow: 0 8px 30px hsl(40 50% 70% / 0.25), 0 4px 10px hsl(40 50% 70% / 0.15);
+  }
+
+  .shadow-rose {
+    box-shadow: 0 8px 30px hsl(15 60% 75% / 0.2), 0 4px 10px hsl(15 60% 75% / 0.15);
+  }
+
+  .text-glow-champagne {
+    text-shadow: 0 0 25px hsl(40 50% 70% / 0.4);
+  }
+
+  .text-glow-rose {
+    text-shadow: 0 0 25px hsl(15 60% 75% / 0.35);
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float 6s ease-in-out infinite 2s;
+  }
+
+  .animate-glow-pulse {
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes glow-pulse {
+
+    0%,
+    100% {
+      box-shadow: 0 0 20px hsl(43 100% 50% / 0.3);
+    }
+
+    50% {
+      box-shadow: 0 0 40px hsl(43 100% 50% / 0.5);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% center;
+    }
+
+    100% {
+      background-position: 200% center;
+    }
+  }
+}
