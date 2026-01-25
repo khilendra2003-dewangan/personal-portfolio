@@ -27,12 +27,12 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-        ? "bg-black/50 backdrop-blur-xl border-b border-white/5 py-4"
+      className={`fixed top-0 left-0 right-0 z-[999] transition-all duration-500 ${isScrolled
+        ? "bg-black/80 backdrop-blur-xl border-b border-white/5 py-4"
         : "bg-transparent py-6"
         }`}
     >
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-[1000]">
         <div className="flex items-center justify-between">
 
           {/* Logo/Brand - KD Monogram */}
@@ -93,7 +93,7 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-white/80 hover:text-[#C9B037] transition-colors relative z-50"
+            className="lg:hidden p-2 text-white/80 hover:text-[#C9B037] transition-colors relative z-[1001]"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -103,10 +103,10 @@ const Navbar = () => {
       {/* Full Screen Mobile Menu Overlay */}
       <motion.div
         initial={false}
-        animate={isMobileMenuOpen ? { opacity: 1, pointerEvents: "auto" } : { opacity: 0, pointerEvents: "none" }}
-        className="fixed inset-0 z-40 bg-black/95 backdrop-blur-3xl lg:hidden flex items-center justify-center"
+        animate={isMobileMenuOpen ? { opacity: 1, pointerEvents: "auto", y: 0 } : { opacity: 0, pointerEvents: "none", y: -20 }}
+        className="fixed inset-0 z-[990] bg-black lg:hidden flex items-center justify-center"
       >
-        <ul className="flex flex-col items-center gap-8">
+        <ul className="flex flex-col items-center gap-8 text-center p-6">
           {navItems.map((item, index) => (
             <motion.li
               key={item.name}
@@ -117,7 +117,7 @@ const Navbar = () => {
               <a
                 href={item.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-3xl font-display font-bold text-white/80 hover:text-[#C9B037] transition-colors"
+                className="text-4xl font-display font-bold text-white/80 hover:text-[#C9B037] transition-colors"
               >
                 {item.name}
               </a>
@@ -131,7 +131,7 @@ const Navbar = () => {
           >
             <a href="#contact" onClick={() => setIsMobileMenuOpen(false)}>
               <Button
-                className="bg-[#C9B037] text-black px-10 py-5 rounded-full font-bold uppercase tracking-widest text-lg"
+                className="bg-[#C9B037] text-black px-12 py-6 rounded-full font-bold uppercase tracking-widest text-lg shadow-[0_0_20px_rgba(201,176,55,0.3)]"
               >
                 Hire Me
               </Button>

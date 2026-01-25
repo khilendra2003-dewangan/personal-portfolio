@@ -224,7 +224,7 @@ const DetailModal = ({ project, onClose }: { project: Project; onClose: () => vo
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center px-4 bg-black/80 backdrop-blur-md"
+            className="fixed inset-0 z-[9999] flex items-center justify-center px-4 bg-black/80 backdrop-blur-md"
             onClick={onClose}
         >
             <motion.div
@@ -241,7 +241,7 @@ const DetailModal = ({ project, onClose }: { project: Project; onClose: () => vo
                 <div className="relative p-8 md:p-12">
                     <button
                         onClick={onClose}
-                        className="absolute top-6 right-6 p-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors text-white/70 hover:text-white"
+                        className="absolute top-4 right-4 z-50 p-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors text-white/70 hover:text-white"
                     >
                         <X size={24} />
                     </button>
