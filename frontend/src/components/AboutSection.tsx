@@ -1,3 +1,4 @@
+
 import React, { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useMotionValue, useSpring, useMotionTemplate } from "framer-motion";
 import { Code2, Database, Cloud, Sparkles, Zap, Shield, ArrowUpRight } from "lucide-react";
@@ -172,7 +173,7 @@ const AboutSection = () => {
         <section
             ref={sectionRef}
             id="about"
-            className="relative min-h-screen py-32 overflow-hidden bg-transparent perspective-1000"
+            className="relative min-h-screen py-32 overflow-hidden bg-gradient-to-br from-[#1a1a1a] via-[#0D0D0D] to-[#0A0A0A] perspective-1000"
         >
             {/* --- Premium Background Effects --- */}
 

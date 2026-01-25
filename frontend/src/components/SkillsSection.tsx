@@ -1,98 +1,38 @@
-import React, { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform, useMotionValue, useSpring, useMotionTemplate } from "framer-motion";
-import { Code2, Server, Database, Cloud, Terminal, Layers, Cpu, Globe, Zap, Box, ShieldCheck, GitBranch, Layout, Monitor, Smartphone, Cpu as CpuIcon, ArrowUpRight } from "lucide-react";
+import React, { useRef, useState } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { Code2, Server, Database, Cloud, Terminal, Layers, Cpu, Globe, Zap, Box, ShieldCheck, GitBranch, Layout, Monitor, Smartphone, Cpu as CpuIcon, ArrowUpRight, X } from "lucide-react";
 import techImage from "@/assets/tech-arsenal-premium.png";
 
 // --- 3D Parallax Card ---
-const ParallaxCard = ({ title, icon: Icon, skills, index }: { title: string, icon: any, skills: any[], index: number }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  // Smooth mouse movement
-  const mouseX = useSpring(x, { stiffness: 200, damping: 20 });
-  const mouseY = useSpring(y, { stiffness: 200, damping: 20 });
-
-  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
-    const { left, top, width, height } = currentTarget.getBoundingClientRect();
-    const xPct = (clientX - left) / width - 0.5;
-    const yPct = (clientY - top) / height - 0.5;
-    x.set(xPct);
-    y.set(yPct);
-  }
-
-  function handleMouseLeave() {
-    x.set(0);
-    y.set(0);
-  }
-
-  const rotateX = useTransform(mouseY, [-0.5, 0.5], ["8deg", "-8deg"]);
-  const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-8deg", "8deg"]);
-
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
+// --- Standard Card (No Tilt) ---
+const ParallaxCard = ({ title, icon: Icon, skills, index, onClick }: { title: string, icon: any, skills: any[], index: number, onClick: () => void }) => {
   return (
     <motion.div
-      ref={cardRef}
       initial={{ opacity: 0, x: 50 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.8, delay: index * 0.1, type: "spring" }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        perspective: isMobile ? "none" : 1000,
-        transformStyle: isMobile ? "flat" : "preserve-3d",
-      }}
       className="w-full h-full min-h-[280px]"
+      onClick={onClick}
     >
-      <motion.div
-        style={{
-          rotateX: isMobile ? 0 : rotateX,
-          rotateY: isMobile ? 0 : rotateY,
-          transformStyle: isMobile ? "flat" : "preserve-3d",
-        }}
+      <div
         className="relative w-full h-full bg-[#050505] md:bg-black/40 backdrop-blur-none md:backdrop-blur-xl border border-white/10 rounded-[24px] overflow-hidden group"
       >
-        {/* --- Interactive Border Glow --- */}
-        <motion.div
-          className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[24px] z-10 pointer-events-none"
-          style={{
-            background: useMotionTemplate`radial-gradient(400px circle at ${mouseX}px ${mouseY}px, rgba(201, 176, 55, 0.15), transparent 40%)`
-          }}
-        />
-
         {/* --- Travel Shine Border --- */}
         <div className="absolute inset-0 z-0 p-[1px] rounded-[24px] bg-gradient-to-br from-white/10 via-transparent to-[#C9B037]/20 opacity-50" />
 
         {/* --- Inner Glow --- */}
         <div className="absolute inset-0 bg-[#C9B037]/5 blur-3xl rounded-[24px] opacity-10 pointer-events-none" />
 
-        {/* --- 3D Content Layer --- */}
-        <motion.div
-          style={{
-            transform: "translateZ(20px)",
-            transformStyle: isMobile ? "flat" : "preserve-3d",
-          }}
-          className="relative z-20 p-6 flex flex-col h-full"
-        >
+        {/* --- Content Layer --- */}
+        <div className="relative z-20 p-6 flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center gap-4 mb-6">
-            {/* Floating Icon Emblem */}
-            <motion.div
-              style={{ transform: "translateZ(15px)" }}
-              className="relative w-12 h-12 flex items-center justify-center rounded-xl bg-gradient-to-br from-white/10 to-black border border-[#C9B037]/30 shadow-[0_0_20px_rgba(201,176,55,0.15)] group-hover:shadow-[0_0_30px_rgba(201,176,55,0.3)] transition-shadow duration-500"
-            >
+            {/* Icon Emblem */}
+            <div className="relative w-12 h-12 flex items-center justify-center rounded-xl bg-gradient-to-br from-white/10 to-black border border-[#C9B037]/30 shadow-[0_0_20px_rgba(201,176,55,0.15)] group-hover:shadow-[0_0_30px_rgba(201,176,55,0.3)] transition-shadow duration-500">
               <Icon className="w-6 h-6 text-[#C9B037] drop-shadow-[0_0_8px_rgba(201,176,55,0.4)]" />
               <div className="absolute inset-0 border border-[#C9B037]/20 rounded-xl animate-spin-slow" />
-            </motion.div>
+            </div>
 
             <div>
               <h3 className="text-xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] tracking-wide">
@@ -107,9 +47,9 @@ const ParallaxCard = ({ title, icon: Icon, skills, index }: { title: string, ico
             {skills.map((skill, i) => (
               <motion.div
                 key={i}
-                style={{ transform: "translateZ(10px)" }}
-                whileHover={{ scale: 1.05, y: -2 }}
-                className="group/skill relative flex items-center gap-2.5 p-3 rounded-xl bg-white/5 border border-white/5 hover:border-[#C9B037]/40 backdrop-blur-md cursor-pointer transition-all duration-300 overflow-hidden hover:shadow-[0_5px_15px_rgba(0,0,0,0.5)]"
+                whileHover={{ scale: 1.05, y: -2, backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                className="group/skill relative flex items-center gap-2.5 p-3 rounded-xl bg-white/5 border border-white/5 hover:border-[#C9B037]/40 backdrop-blur-md cursor-pointer transition-colors duration-300 overflow-hidden hover:shadow-[0_5px_15px_rgba(0,0,0,0.5)]"
               >
                 {/* Rolling Shimmer Effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/skill:translate-x-full transition-transform duration-700 ease-in-out z-0" />
@@ -130,9 +70,9 @@ const ParallaxCard = ({ title, icon: Icon, skills, index }: { title: string, ico
               </motion.div>
             ))}
           </div>
-        </motion.div>
+        </div>
 
-      </motion.div>
+      </div>
     </motion.div>
   );
 };
@@ -160,63 +100,143 @@ const ConnectingLines = () => {
   )
 }
 
+const SkillDetailModal = ({ category, onClose }: { category: any; onClose: () => void }) => {
+  if (!category) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.9, y: 30, opacity: 0 }}
+        animate={{ scale: 1, y: 0, opacity: 1 }}
+        exit={{ scale: 0.9, y: 30, opacity: 0 }}
+        onClick={(e) => e.stopPropagation()}
+        className="w-full max-w-lg bg-[#080808] border border-[#C9B037]/30 rounded-3xl overflow-hidden shadow-[0_0_80px_rgba(201,176,55,0.2)] relative"
+      >
+        {/* Luxury Glows */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-[#C9B037]/10 blur-[80px] rounded-full pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-40 h-40 bg-white/5 blur-[50px] rounded-full pointer-events-none" />
+
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 p-2 rounded-full bg-white/5 hover:bg-white/10 text-white/50 hover:text-white transition-colors z-10"
+        >
+          <X size={20} />
+        </button>
+
+        <div className="p-8">
+          {/* Header */}
+          <div className="flex items-center gap-5 mb-8">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-white/10 to-black border border-[#C9B037]/30 flex items-center justify-center shadow-[0_0_20px_rgba(201,176,55,0.15)]">
+              <category.icon className="w-8 h-8 text-[#C9B037]" />
+            </div>
+            <div>
+              <div className="text-[#C9B037] text-xs font-bold tracking-widest uppercase mb-1">Tech Stack</div>
+              <h3 className="text-3xl font-display font-bold text-white">{category.title}</h3>
+            </div>
+          </div>
+
+          {/* Progress Bars */}
+          <div className="space-y-6">
+            {category.skills.map((skill: any, i: number) => (
+              <div key={i}>
+                <div className="flex justify-between items-center mb-2">
+                  <div className="flex items-center gap-2">
+                    <skill.icon className="w-4 h-4 text-white/60" />
+                    <span className="text-white/90 font-medium">{skill.name}</span>
+                  </div>
+                  <span className="text-[#C9B037] font-bold text-sm">{skill.level}%</span>
+                </div>
+
+                {/* Bar Container */}
+                <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: `${skill.level}%` }}
+                    transition={{ duration: 1, delay: 0.2 + (i * 0.1), ease: "easeOut" }}
+                    className="h-full bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] rounded-full shadow-[0_0_10px_rgba(201,176,55,0.5)]"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 pt-6 border-t border-white/10 text-center">
+            <p className="text-white/40 text-sm italic">
+              "Continuous improvement is better than delayed perfection."
+            </p>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
 const SkillsSection = () => {
   const sectionRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
   const yBG = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const yImage = useTransform(scrollYProgress, [0, 1], [50, -50]);
 
+  const [selectedCategory, setSelectedCategory] = useState<any>(null);
+
   const categories = [
     {
       title: "Frontend",
       icon: Monitor,
       skills: [
-        { name: "HTML", icon: Layout },
-        { name: "CSS", icon: Box },
-        { name: "JavaScript", icon: Terminal },
-        { name: "Tailwind", icon: Layers },
-        { name: "React", icon: Code2 },
-        { name: "TypeScript", icon: CpuIcon },
+        { name: "HTML", icon: Layout, level: 95 },
+        { name: "CSS", icon: Box, level: 90 },
+        { name: "JavaScript", icon: Terminal, level: 92 },
+        { name: "React", icon: Code2, level: 88 },
+        { name: "TypeScript", icon: CpuIcon, level: 85 },
+        { name: "Tailwind", icon: Layers, level: 90 },
       ]
     },
     {
       title: "Backend",
       icon: Server,
       skills: [
-        { name: "Node.js", icon: Terminal },
-        { name: "Express", icon: CpuIcon },
-        { name: "Python", icon: Code2 },
-        { name: "Microservices", icon: Server },
+        { name: "Node.js", icon: Terminal, level: 85 },
+        { name: "Express", icon: CpuIcon, level: 85 },
+        { name: "Python", icon: Code2, level: 80 },
+        { name: "Microservices", icon: Server, level: 75 },
       ]
     },
     {
       title: "Database",
       icon: Database,
       skills: [
-        { name: "MongoDB", icon: Database },
-        { name: "PostgreSQL", icon: Database },
-        { name: "Redis", icon: Layers },
-        { name: "Pinecone", icon: Layers },
-        { name: "Vector Database", icon: Database },
+        { name: "MongoDB", icon: Database, level: 88 },
+        { name: "PostgreSQL", icon: Database, level: 82 },
+        { name: "Redis", icon: Layers, level: 75 },
+        { name: "Pinecone", icon: Layers, level: 80 },
       ]
     },
     {
       title: "Cloud / DevOps",
       icon: Cloud,
       skills: [
-        { name: "AWS", icon: Cloud },
-        { name: "GCP", icon: Cloud },
-        { name: "Kubernetes", icon: Server },
+        { name: "AWS", icon: Cloud, level: 70 },
+        { name: "GCP", icon: Cloud, level: 65 },
+        { name: "Kubernetes", icon: Server, level: 60 },
+        { name: "Docker", icon: Box, level: 80 },
       ]
     },
     {
       title: "Tools",
       icon: ShieldCheck,
       skills: [
-        { name: "Docker", icon: Box },
-        { name: "Git", icon: GitBranch },
-        { name: "CI/CD", icon: Zap },
-        { name: "VS Code", icon: Code2 },
+        { name: "Git", icon: GitBranch, level: 90 },
+        { name: "CI/CD", icon: Zap, level: 75 },
+        { name: "VS Code", icon: Code2, level: 95 },
+        { name: "Figma", icon: Layout, level: 85 },
       ]
     }
   ];
@@ -266,9 +286,10 @@ const SkillsSection = () => {
               style={{ y: yImage }}
               initial={{ opacity: 0, rotateY: 15, x: -50 }}
               whileInView={{ opacity: 1, rotateY: 0, x: 0 }}
+              whileHover={{ scale: 1.02, rotateY: 5 }}
               viewport={{ once: true }}
               transition={{ duration: 1, type: "spring" }}
-              className="relative rounded-[40px] overflow-hidden border border-white/10 bg-black/50 shadow-[0_0_50px_rgba(0,0,0,0.5)] group"
+              className="relative rounded-[40px] overflow-hidden border border-white/10 bg-black/50 shadow-[0_0_50px_rgba(0,0,0,0.5)] hover:shadow-[0_0_80px_rgba(201,176,55,0.2)] group cursor-pointer"
             >
               {/* Gold Border Glow */}
               <div className="absolute inset-0 z-20 rounded-[40px] pointer-events-none border border-[#C9B037]/30 group-hover:border-[#C9B037]/60 transition-colors duration-500" />
@@ -307,14 +328,23 @@ const SkillsSection = () => {
                     title={cat.title}
                     icon={cat.icon}
                     skills={cat.skills}
+                    onClick={() => setSelectedCategory(cat)}
                   />
                 </div>
               ))}
             </div>
           </div>
-
         </div>
       </div>
+
+      <AnimatePresence>
+        {selectedCategory && (
+          <SkillDetailModal
+            category={selectedCategory}
+            onClose={() => setSelectedCategory(null)}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 };

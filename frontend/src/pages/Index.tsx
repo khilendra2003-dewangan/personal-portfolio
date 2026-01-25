@@ -7,6 +7,7 @@ import PortfolioSection from "@/components/PortfolioSection";
 import EducationSection from "@/components/EducationSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import FloatingRobot from "@/components/FloatingRobot";
 
 const Index = () => {
   return (
@@ -38,6 +39,7 @@ const Index = () => {
       <EducationSection />
       <ServicesSection />
       <ContactSection />
+      <FloatingRobot />
       <Footer />
     </div>
   );

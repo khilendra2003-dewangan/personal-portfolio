@@ -79,6 +79,45 @@
     --sidebar-border: 43 30% 20%;
     --sidebar-ring: 43 74% 49%;
   }
+
+  /* LUXURY THEME (Scoped) */
+  .luxury-theme {
+    /* Ivory / Cream Backgrounds */
+    --background: 40 20% 98%;
+    /* Very light cream */
+    --foreground: 40 10% 20%;
+    /* Soft charcoal */
+
+    --card: 40 30% 96%;
+    /* Slightly darker cream */
+    --card-foreground: 40 10% 20%;
+
+    /* Premium Accents */
+    --primary: 43 40% 50%;
+    /* Muted Gold */
+    --primary-foreground: 40 20% 98%;
+
+    --secondary: 30 15% 90%;
+    /* Sand/Beige */
+    --secondary-foreground: 40 10% 20%;
+
+    --muted: 40 10% 90%;
+    --muted-foreground: 40 5% 50%;
+
+    --accent: 20 30% 85%;
+    /* Soft Copper Tint */
+    --accent-foreground: 40 10% 15%;
+
+    --border: 43 30% 85%;
+
+    /* Luxury Gradients */
+    --gradient-luxury: linear-gradient(135deg, hsl(40 20% 98% 0.9), hsl(40 20% 95% 0.9));
+    --gradient-gold: linear-gradient(135deg, hsl(43 40% 50%), hsl(35 50% 60%));
+
+    /* Shadows */
+    --shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.05);
+    --shadow-hover: 0 20px 50px -12px rgba(60, 50, 30, 0.1);
+  }
 }
 
 @layer base {

@@ -266,19 +266,37 @@ const DetailModal = ({ project, onClose }: { project: Project; onClose: () => vo
                             <h3 className="text-xl font-bold text-white mb-6">Tech Stack</h3>
                             <div className="flex flex-wrap gap-3 mb-10">
                                 {project.tech.map((t, i) => (
-                                    <span key={i} className="px-4 py-2 rounded-full bg-white/5 border border-white/5 text-white/80 text-sm font-medium">
+                                    <motion.span
+                                        key={i}
+                                        whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.1)", borderColor: "#C9B037" }}
+                                        className="px-4 py-2 rounded-full bg-white/5 border border-white/5 text-white/80 text-sm font-medium cursor-default transition-colors duration-300"
+                                    >
                                         {t}
-                                    </span>
+                                    </motion.span>
                                 ))}
                             </div>
 
                             <div className="flex gap-4">
-                                <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="flex-1 py-4 rounded-xl bg-[#C9B037] text-black font-bold text-center hover:bg-[#D4AF37] transition-colors flex items-center justify-center gap-2">
+                                <motion.a
+                                    href={project.liveLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="flex-1 py-4 rounded-xl bg-[#C9B037] text-black font-bold text-center hover:bg-[#D4AF37] transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(201,176,55,0.3)] hover:shadow-[0_0_25px_rgba(201,176,55,0.5)]"
+                                >
                                     <ExternalLink size={18} /> View Live
-                                </a>
-                                <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="flex-1 py-4 rounded-xl bg-white/10 text-white font-bold text-center hover:bg-white/20 transition-colors flex items-center justify-center gap-2 border border-white/10">
+                                </motion.a>
+                                <motion.a
+                                    href={project.githubLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.2)" }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="flex-1 py-4 rounded-xl bg-white/10 text-white font-bold text-center hover:bg-white/20 transition-all flex items-center justify-center gap-2 border border-white/10 hover:border-white/30"
+                                >
                                     <Github size={18} /> Source Code
-                                </a>
+                                </motion.a>
                             </div>
                         </div>
                     </div>
