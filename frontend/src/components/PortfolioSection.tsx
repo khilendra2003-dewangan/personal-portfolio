@@ -312,11 +312,12 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
                                 <div className="relative w-full h-full bg-black">
                                     <video
                                         ref={videoRef}
-                                        src={project.videoUrl}
+                                        src={`${project.videoUrl}${project.videoUrl?.includes('?') ? '&' : '?'}t=0.001`}
                                         className="w-full h-full object-cover rounded-3xl transition-transform duration-1000 group-hover:scale-105"
                                         muted={false} // Allow sound if user played it
                                         loop
                                         playsInline
+                                        preload="metadata"
                                     />
 
                                     {/* Custom Control Overlay (Replacing default controls for style) */}

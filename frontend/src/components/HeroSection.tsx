@@ -5,14 +5,15 @@ import heroImage from "@/assets/hero-developer-8k.jpg"; // Using the 8k image as
 
 const HeroSection = () => {
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 1000], [0, 300]); // Parallax
+  const y = useTransform(scrollY, [0, 1000], [0, 400]); // Parallax - increased depth for impact
   const opacity = useTransform(scrollY, [0, 500], [1, 0]);
 
   // 3D Tilt Effect - applied to the text container
   const x = useMotionValue(0);
   const yRotate = useMotionValue(0);
-  const mouseX = useSpring(x, { stiffness: 500, damping: 50 });
-  const mouseY = useSpring(yRotate, { stiffness: 500, damping: 50 }); // Higher damping for smoother float
+  // Increased damping for smoother, heavier feel compatible with Lenis
+  const mouseX = useSpring(x, { stiffness: 400, damping: 90 });
+  const mouseY = useSpring(yRotate, { stiffness: 400, damping: 90 });
 
   function handleMouseMove({ clientX, clientY, currentTarget }: React.MouseEvent) {
     const { left, top, width, height } = currentTarget.getBoundingClientRect();
