@@ -2,7 +2,7 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { GraduationCap, BookOpen, Award, Calendar, MapPin, GitBranch, CheckCircle2 } from "lucide-react";
-import graduationImg from "@/assets/graduation.png";
+import graduationImg from "@/assets/img1.jpg";
 
 const EducationSection = () => {
     const containerRef = useRef(null);

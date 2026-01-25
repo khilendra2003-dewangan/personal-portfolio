@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useMotionValue, useSpring, useMotionTemplate } from "framer-motion";
 import { Code2, Server, Database, Cloud, Terminal, Layers, Cpu, Globe, Zap, Box, ShieldCheck, GitBranch, Layout, Monitor, Smartphone, Cpu as CpuIcon, ArrowUpRight } from "lucide-react";
-import techImage from "@/assets/image.png";
+import techImage from "@/assets/tech-arsenal-premium.png";
 
 // --- 3D Parallax Card ---
 const ParallaxCard = ({ title, icon: Icon, skills, index }: { title: string, icon: any, skills: any[], index: number }) => {
@@ -261,14 +261,14 @@ const SkillsSection = () => {
         <div className="flex flex-col lg:flex-row items-stretch gap-12 lg:gap-20">
 
           {/* --- LEFT: Image Showcase --- */}
-          <div className="w-full lg:w-5/12 relative min-h-[500px] lg:h-auto">
+          <div className="w-full lg:w-5/12 relative lg:h-auto">
             <motion.div
               style={{ y: yImage }}
               initial={{ opacity: 0, rotateY: 15, x: -50 }}
               whileInView={{ opacity: 1, rotateY: 0, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, type: "spring" }}
-              className="relative rounded-[40px] overflow-hidden border border-white/10 bg-black/50 shadow-[0_0_50px_rgba(0,0,0,0.5)] group h-full"
+              className="relative rounded-[40px] overflow-hidden border border-white/10 bg-black/50 shadow-[0_0_50px_rgba(0,0,0,0.5)] group"
             >
               {/* Gold Border Glow */}
               <div className="absolute inset-0 z-20 rounded-[40px] pointer-events-none border border-[#C9B037]/30 group-hover:border-[#C9B037]/60 transition-colors duration-500" />
@@ -279,7 +279,7 @@ const SkillsSection = () => {
               <img
                 src={techImage}
                 alt="Tech Stack Showcase"
-                className="w-full h-full object-cover transform scale-105 group-hover:scale-110 transition-transform duration-700 ease-out grayscale-[0.2] group-hover:grayscale-0"
+                className="w-full h-auto object-contain transition-transform duration-700 ease-out grayscale-[0.2] group-hover:grayscale-0"
               />
 
               {/* Floating Elements on Image */}

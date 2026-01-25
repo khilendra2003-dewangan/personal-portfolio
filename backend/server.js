@@ -18,6 +18,10 @@ app.use(express.json());
 // Routes
 app.use('/api/contact', contactRoutes);
 
+app.get("/", (req, res) => {
+  res.send("API is running...");
+});
+
 // Database Connection
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log('✅ MongoDB Connected'))
