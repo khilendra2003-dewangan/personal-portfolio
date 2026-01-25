@@ -155,19 +155,22 @@ const DetailModal = ({ project, onClose }: { project: Project; onClose: () => vo
                 animate={{ scale: 1, y: 0, opacity: 1 }}
                 exit={{ scale: 0.9, y: 50, opacity: 0 }}
                 onClick={(e) => e.stopPropagation()}
-                className="relative w-full max-w-4xl bg-black/90 border border-white/10 rounded-[40px] shadow-2xl overflow-hidden"
+                className="relative w-full max-w-4xl max-h-[90vh] flex flex-col bg-black/90 border border-white/10 rounded-[40px] shadow-2xl overflow-hidden"
             >
                 {/* Decorative Gradients */}
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#C9B037] opacity-10 blur-[120px] rounded-full pointer-events-none" />
                 <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-white opacity-5 blur-[100px] rounded-full pointer-events-none" />
 
-                <div className="relative p-8 md:p-12">
+                <div className="absolute top-4 right-4 z-[100000]">
                     <button
                         onClick={onClose}
-                        className="absolute top-4 right-4 z-[100000] p-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors text-white/70 hover:text-white"
+                        className="p-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors text-white/70 hover:text-white"
                     >
                         <X size={24} />
                     </button>
+                </div>
+
+                <div className="overflow-y-auto max-h-full p-8 md:p-12 custom-scrollbar">
 
                     <div className="mb-2 text-[#C9B037] font-medium tracking-widest text-sm uppercase">{project.category}</div>
                     <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-8">{project.title}</h2>
