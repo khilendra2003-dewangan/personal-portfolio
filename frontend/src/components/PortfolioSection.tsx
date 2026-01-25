@@ -31,7 +31,7 @@ const fullStackProjects: Project[] = [
         liveLink: "https://real-estate-frontend-9ryp.onrender.com",
         githubLink: "https://github.com/khilendra2003-dewangan/real-estate-first.git",
         color: "#C9B037",
-        videoUrl: "https://player.cloudinary.com/embed/?cloud_name=dwrltrqcl&public_id=real_state_video_ppjoyr",
+        videoUrl: "https://res.cloudinary.com/dwrltrqcl/video/upload/real_state_video_ppjoyr.mp4",
 
     }
 ];
