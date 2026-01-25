@@ -234,7 +234,7 @@ const ServiceDetailModal = ({ service, onClose }: { service: any, onClose: () =>
                 animate={{ scale: 1, y: 0, opacity: 1 }}
                 exit={{ scale: 0.95, y: 50, opacity: 0 }}
                 onClick={(e) => e.stopPropagation()}
-                className="relative w-full max-w-6xl bg-[#080808] border border-white/10 rounded-[40px] shadow-2xl overflow-hidden my-10"
+                className="relative w-full max-w-6xl max-h-[85vh] flex flex-col bg-[#080808] border border-white/10 rounded-[40px] shadow-2xl overflow-hidden my-10"
             >
                 {/* --- Luxury Background Elements --- */}
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#C9B037]/5 blur-[100px] rounded-full pointer-events-none" />
@@ -248,7 +248,7 @@ const ServiceDetailModal = ({ service, onClose }: { service: any, onClose: () =>
                     <X size={24} />
                 </button>
 
-                <div className="flex flex-col lg:flex-row h-full max-h-[90vh]">
+                <div className="flex flex-col lg:flex-row flex-1 min-h-0">
                     {/* --- Left Sidebar (Sticky Header Info) --- */}
                     <div className="hidden lg:flex flex-col w-1/3 bg-white/2 p-10 border-r border-white/5 relative overflow-hidden">
                         <div className="absolute inset-0 bg-gradient-to-br from-[#C9B037]/5 via-transparent to-transparent opacity-50" />

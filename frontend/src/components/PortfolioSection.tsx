@@ -28,11 +28,34 @@ const fullStackProjects: Project[] = [
         problem: "Navigating the property market is often complex, with disjointed communication between buyers, sellers, and agents leading to missed opportunities.",
         solution: "A unified real estate ecosystem enabling seamless buying, selling, and renting. Features dedicated agent profiles, direct messaging, and advanced property search.",
         tech: ["React", "Tailwind", "Node.js", "Express", "MongoDB"],
-        liveLink: "https://real-estate-frontend-9ryp.onrender.com",
+        liveLink: "https://real-estate-first.vercel.app",
         githubLink: "https://github.com/khilendra2003-dewangan/real-estate-first.git",
         color: "#C9B037",
         videoUrl: "https://res.cloudinary.com/dwrltrqcl/video/upload/real_state_video_ppjoyr.mp4",
-
+    },
+    {
+        id: 7,
+        title: "Foodiex",
+        category: "Culinary Tech",
+        problem: "Digital food ordering experiences often feel transactional and disconnected, lacking the appetizing visual appeal that drives culinary desire.",
+        solution: "An immersive gastronomical interface combining video-first discovery with seamless ordering logic, creating a digital dining experience as refined as the meal itself.",
+        tech: ["React", "Tailwind", "Node.js", "Express", "Vercel"],
+        liveLink: "https://foodordering-mu.vercel.app",
+        githubLink: "https://github.com/khilendra2003-dewangan/hotalfoodweb.git",
+        color: "#FF6B6B",
+        videoUrl: "https://res.cloudinary.com/dwrltrqcl/video/upload/v1769344458/Untitled_design_pms66n.mp4",
+    },
+    {
+        id: 8,
+        title: "Developer Portfolio",
+        category: "Personal Brand",
+        problem: "Developers need a unique digital identity to stand out in a competitive market and showcase their capabilities effectively.",
+        solution: "A high-performance, visually stunning portfolio website featuring smooth animations, interactive elements, and a showcase of technical prowess.",
+        tech: ["React", "Tailwind CSS", "Framer Motion", "Vercel"],
+        liveLink: "https://personal-portfolio-lake-zeta-15.vercel.app",
+        githubLink: "https://github.com/khilendra2003-dewangan/personal-portfolio.git",
+        color: "#64FFDA",
+        videoUrl: "https://res.cloudinary.com/dwrltrqcl/video/upload/v1769346334/Untitled_design_2_ymz41s.mp4",
     }
 ];
 
@@ -84,7 +107,7 @@ const frontendProjects: Project[] = [
         solution: "A premium interior design portfolio featuring cinematic video backgrounds, gallery interactions, and a polished dark-themed aesthetic.",
         tech: ["React", "TypeScript", "GSAP", "Tailwind", "Framer Motion"],
         liveLink: "https://posan-interiors.vercel.app/",
-        githubLink: "#",
+        githubLink: "https://github.com/khilendra2003-dewangan/Posan-interiors.git",
         color: "#C9B037",
         videoUrl: "https://res.cloudinary.com/dwrltrqcl/video/upload/v1768491911/Screen_Recording_2026-01-15_210920_xwltoh.mp4",
 
@@ -97,7 +120,7 @@ const frontendProjects: Project[] = [
         solution: "A cinematic storytelling experience with parallax scrolling, interactive timeline, and seamless RSVP integration wrapped in an elegant UI.",
         tech: ["React", "Framer Motion", "GSAP", "Tailwind CSS"],
         liveLink: "https://marrigewebsite.vercel.app/",
-        githubLink: "#",
+        githubLink: "https://github.com/khilendra2003-dewangan/marrigewebsite.git",
         color: "#E0B0FF",
         videoUrl: "https://res.cloudinary.com/dwrltrqcl/video/upload/v1768493622/Screen_Recording_2026-01-15_214102_jidma8.mp4",
     }
@@ -313,6 +336,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
                                     <video
                                         ref={videoRef}
                                         src={`${project.videoUrl}${project.videoUrl?.includes('?') ? '&' : '?'}t=0.001`}
+                                        poster={project.videoUrl.replace('.mp4', '.jpg')}
                                         className="w-full h-full object-cover rounded-3xl transition-transform duration-1000 group-hover:scale-105"
                                         muted={false} // Allow sound if user played it
                                         loop
