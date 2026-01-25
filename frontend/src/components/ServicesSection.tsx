@@ -1,5 +1,5 @@
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence, useMotionTemplate } from "framer-motion";
 import { Layers, Database, Cloud, Sparkles, Workflow, Shield, ArrowRight, X, CheckCircle2, Zap, Trophy, Rocket, Target, ChevronRight } from "lucide-react";
 
@@ -205,17 +205,28 @@ const services = [
     },
 ];
 
+import { createPortal } from "react-dom";
+
+// ...
+
 // --- Modal Component ---
 const ServiceDetailModal = ({ service, onClose }: { service: any, onClose: () => void }) => {
     if (!service || !service.popupData) return null;
     const { popupData } = service;
 
-    return (
+    useEffect(() => {
+        document.body.style.overflow = "hidden";
+        return () => {
+            document.body.style.overflow = "auto";
+        };
+    }, []);
+
+    return createPortal(
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl overflow-y-auto"
+            className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black overflow-y-auto"
             onClick={onClose}
         >
             <motion.div
@@ -232,7 +243,7 @@ const ServiceDetailModal = ({ service, onClose }: { service: any, onClose: () =>
                 {/* --- Close Button --- */}
                 <button
                     onClick={onClose}
-                    className="absolute top-6 right-6 z-50 p-3 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all transform hover:rotate-90 border border-white/5 hover:border-white/20"
+                    className="absolute top-6 right-6 z-[100000] p-3 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all transform hover:rotate-90 border border-white/5 hover:border-white/20"
                 >
                     <X size={24} />
                 </button>
@@ -392,7 +403,8 @@ const ServiceDetailModal = ({ service, onClose }: { service: any, onClose: () =>
                     </div>
                 </div>
             </motion.div>
-        </motion.div>
+        </motion.div>,
+        document.body
     );
 };
 

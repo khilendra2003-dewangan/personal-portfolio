@@ -143,17 +143,28 @@ const frontendProjects: Project[] = [
 
 // --- Components ---
 
+import { createPortal } from "react-dom";
+
+// ... (other imports)
+
 const GalleryModal = ({ images, title, onClose }: { images: string[]; title: string; onClose: () => void }) => {
-    return (
+    useEffect(() => {
+        document.body.style.overflow = "hidden";
+        return () => {
+            document.body.style.overflow = "auto";
+        };
+    }, []);
+
+    return createPortal(
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[9999] bg-black/98 backdrop-blur-xl flex flex-col"
+            className="fixed inset-0 z-[99999] bg-black flex flex-col"
             onClick={onClose}
         >
             {/* Close Button Area - Separate from content flow to ensure clickable */}
-            <div className="absolute top-8 right-8 z-[10002] pointer-events-auto">
+            <div className="absolute top-8 right-8 z-[100002] pointer-events-auto">
                 <button
                     onClick={(e) => {
                         e.stopPropagation();
@@ -171,7 +182,7 @@ const GalleryModal = ({ images, title, onClose }: { images: string[]; title: str
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.98, opacity: 0 }}
                 onClick={(e) => e.stopPropagation()}
-                className="flex flex-col h-full max-w-[1600px] mx-auto w-full relative z-[9999]"
+                className="flex flex-col h-full max-w-[1600px] mx-auto w-full relative z-[100001]"
             >
                 {/* Header - Fixed Height/Shrink */}
                 <div className="flex-shrink-0 pt-20 pb-8 px-6 text-center select-none">
@@ -214,17 +225,25 @@ const GalleryModal = ({ images, title, onClose }: { images: string[]; title: str
                     </div>
                 </div>
             </motion.div>
-        </motion.div>
+        </motion.div>,
+        document.body
     );
 };
 
 const DetailModal = ({ project, onClose }: { project: Project; onClose: () => void }) => {
-    return (
+    useEffect(() => {
+        document.body.style.overflow = "hidden";
+        return () => {
+            document.body.style.overflow = "auto";
+        };
+    }, []);
+
+    return createPortal(
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[9999] flex items-center justify-center px-4 bg-black/80 backdrop-blur-md"
+            className="fixed inset-0 z-[99999] flex items-center justify-center px-4 bg-black"
             onClick={onClose}
         >
             <motion.div
@@ -241,7 +260,7 @@ const DetailModal = ({ project, onClose }: { project: Project; onClose: () => vo
                 <div className="relative p-8 md:p-12">
                     <button
                         onClick={onClose}
-                        className="absolute top-4 right-4 z-50 p-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors text-white/70 hover:text-white"
+                        className="absolute top-4 right-4 z-[100000] p-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors text-white/70 hover:text-white"
                     >
                         <X size={24} />
                     </button>
@@ -302,7 +321,8 @@ const DetailModal = ({ project, onClose }: { project: Project; onClose: () => vo
                     </div>
                 </div>
             </motion.div>
-        </motion.div>
+        </motion.div>,
+        document.body
     );
 };
 

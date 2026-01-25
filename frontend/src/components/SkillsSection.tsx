@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Code2, Server, Database, Cloud, Terminal, Layers, Cpu, Globe, Zap, Box, ShieldCheck, GitBranch, Layout, Monitor, Smartphone, Cpu as CpuIcon, ArrowUpRight, X } from "lucide-react";
 import techImage from "@/assets/tech-arsenal-premium.png";
@@ -100,15 +100,26 @@ const ConnectingLines = () => {
   )
 }
 
+import { createPortal } from "react-dom";
+
+// ...
+
 const SkillDetailModal = ({ category, onClose }: { category: any; onClose: () => void }) => {
   if (!category) return null;
 
-  return (
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
+  return createPortal(
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+      className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black"
       onClick={onClose}
     >
       <motion.div
@@ -125,7 +136,7 @@ const SkillDetailModal = ({ category, onClose }: { category: any; onClose: () =>
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full bg-white/5 hover:bg-white/10 text-white/50 hover:text-white transition-colors z-10"
+          className="absolute top-4 right-4 z-[100000] p-2 rounded-full bg-white/5 hover:bg-white/10 text-white/50 hover:text-white transition-colors"
         >
           <X size={20} />
         </button>
@@ -174,7 +185,8 @@ const SkillDetailModal = ({ category, onClose }: { category: any; onClose: () =>
           </div>
         </div>
       </motion.div>
-    </motion.div>
+    </motion.div>,
+    document.body
   );
 };
 
