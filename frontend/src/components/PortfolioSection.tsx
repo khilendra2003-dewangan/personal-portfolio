@@ -1,40 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence, useMotionTemplate, useInView } from "framer-motion";
-import { ExternalLink, Github, X, ChevronRight, Layers, Code2, Database, Zap, Globe, Smartphone, Monitor, Image as ImageIcon } from "lucide-react";
+import { ExternalLink, Github, X, ChevronRight, Layers, Code2, Database, Zap, Globe, Smartphone, Monitor } from "lucide-react";
 
-// Import Gallery Images
-import img1 from "@/assets/user-ui/Screenshot 2026-01-15 185521.png";
-import img2 from "@/assets/user-ui/Screenshot 2026-01-15 185550.png";
-import img3 from "@/assets/user-ui/Screenshot 2026-01-15 185625.png";
-import img4 from "@/assets/user-ui/Screenshot 2026-01-15 185649.png";
-import img5 from "@/assets/user-ui/Screenshot 2026-01-15 185716.png";
-import img6 from "@/assets/user-ui/Screenshot 2026-01-15 185737.png";
-import img7 from "@/assets/user-ui/Screenshot 2026-01-15 185753.png";
-import img8 from "@/assets/user-ui/Screenshot 2026-01-15 185818.png";
-import img9 from "@/assets/user-ui/Screenshot 2026-01-15 185856.png";
-import img10 from "@/assets/user-ui/Screenshot 2026-01-15 185927.png";
-import img11 from "@/assets/user-ui/Screenshot 2026-01-15 185955.png";
-import img12 from "@/assets/user-ui/Screenshot 2026-01-15 190014.png";
-import img13 from "@/assets/user-ui/Screenshot 2026-01-15 190035.png";
-import img14 from "@/assets/user-ui/Screenshot 2026-01-15 190105.png";
-import img15 from "@/assets/user-ui/Screenshot 2026-01-15 190129.png";
-import img16 from "@/assets/user-ui/Screenshot 2026-01-15 190255.png";
-import img17 from "@/assets/user-ui/Screenshot 2026-01-15 190323.png";
-import img18 from "@/assets/user-ui/Screenshot 2026-01-15 190546.png";
-import img19 from "@/assets/user-ui/Screenshot 2026-01-15 190606.png";
 
-import img20 from "@/assets/interierdesign/Screenshot 2026-01-15 211743.png";
-import img21 from "@/assets/interierdesign/Screenshot 2026-01-15 211804.png";
-import img22 from "@/assets/interierdesign/Screenshot 2026-01-15 211829.png";
-import img23 from "@/assets/interierdesign/Screenshot 2026-01-15 211853.png";
-import img24 from "@/assets/interierdesign/Screenshot 2026-01-15 211915.png";
-import img25 from "@/assets/interierdesign/Screenshot 2026-01-15 211937.png";
-import img26 from "@/assets/interierdesign/Screenshot 2026-01-15 211956.png";
-import img27 from "@/assets/interierdesign/Screenshot 2026-01-15 212054.png";
-import img28 from "@/assets/interierdesign/Screenshot 2026-01-15 212118.png";
-import img29 from "@/assets/interierdesign/Screenshot 2026-01-15 212138.png";
-import img30 from "@/assets/interierdesign/Screenshot 2026-01-15 212204.png";
-import img31 from "@/assets/interierdesign/Screenshot 2026-01-15 212229.png";
 
 // --- Types ---
 interface Project {
@@ -48,7 +16,7 @@ interface Project {
     githubLink: string;
     color: string;
     videoUrl?: string;
-    galleryImages?: string[];
+
 }
 
 // --- Data ---
@@ -64,10 +32,7 @@ const fullStackProjects: Project[] = [
         githubLink: "https://github.com/khilendra2003-dewangan/real-estate-first.git",
         color: "#C9B037",
         videoUrl: "https://player.cloudinary.com/embed/?cloud_name=dwrltrqcl&public_id=real_state_video_ppjoyr",
-        galleryImages: [
-            img1, img2, img3, img4, img5, img6, img7, img8, img9, img10,
-            img11, img12, img13, img14, img15, img16, img17, img18, img19
-        ]
+
     }
 ];
 
@@ -122,10 +87,7 @@ const frontendProjects: Project[] = [
         githubLink: "#",
         color: "#C9B037",
         videoUrl: "https://res.cloudinary.com/dwrltrqcl/video/upload/v1768491911/Screen_Recording_2026-01-15_210920_xwltoh.mp4",
-        galleryImages: [
-            img20, img21, img22, img23, img24, img25,
-            img26, img27, img28, img29, img30, img31
-        ]
+
     },
     {
         id: 6,
@@ -147,88 +109,7 @@ import { createPortal } from "react-dom";
 
 // ... (other imports)
 
-const GalleryModal = ({ images, title, onClose }: { images: string[]; title: string; onClose: () => void }) => {
-    useEffect(() => {
-        document.body.style.overflow = "hidden";
-        return () => {
-            document.body.style.overflow = "auto";
-        };
-    }, []);
 
-    return createPortal(
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[99999] bg-black flex flex-col"
-            onClick={onClose}
-        >
-            {/* Close Button Area - Separate from content flow to ensure clickable */}
-            <div className="absolute top-8 right-8 z-[100002] pointer-events-auto">
-                <button
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        onClose();
-                    }}
-                    className="p-4 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all transform hover:scale-110 border border-white/10 cursor-pointer shadow-2xl backdrop-blur-md"
-                >
-                    <X size={32} />
-                </button>
-            </div>
-
-            {/* Content Container - Flex Column to prevent overlap */}
-            <motion.div
-                initial={{ scale: 0.98, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.98, opacity: 0 }}
-                onClick={(e) => e.stopPropagation()}
-                className="flex flex-col h-full max-w-[1600px] mx-auto w-full relative z-[100001]"
-            >
-                {/* Header - Fixed Height/Shrink */}
-                <div className="flex-shrink-0 pt-20 pb-8 px-6 text-center select-none">
-                    <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-2">{title} <span className="text-[#C9B037]">Gallery</span></h3>
-                    <p className="text-white/50 text-lg">User Interface & Design System</p>
-                </div>
-
-                {/* Grid - Scrollable Area */}
-                <div
-                    className="flex-1 overflow-y-auto px-6 pb-20 gallery-grid-scroll"
-                >
-                    <style>{`
-                        .gallery-grid-scroll::-webkit-scrollbar {
-                            display: none;
-                        }
-                        .gallery-grid-scroll {
-                            -ms-overflow-style: none;
-                            scrollbar-width: none;
-                        }
-                    `}</style>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {images.map((img, idx) => (
-                            <motion.div
-                                key={idx}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: idx * 0.03 }}
-                                className="group relative aspect-video rounded-xl overflow-hidden border border-white/10 bg-white/5 select-none"
-                            >
-                                <img
-                                    src={img}
-                                    alt={`UI Screen ${idx + 1}`}
-                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                    loading="lazy"
-                                />
-                                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300" />
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </motion.div>
-        </motion.div>,
-        document.body
-    );
-};
 
 const DetailModal = ({ project, onClose }: { project: Project; onClose: () => void }) => {
     useEffect(() => {
@@ -331,7 +212,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
     const [isHovered, setIsHovered] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
     const [showDetail, setShowDetail] = useState(false);
-    const [showGallery, setShowGallery] = useState(false);
+
 
     // Video Ref
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -489,13 +370,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
                                         />
                                     ) : (
                                         <>
-                                            {project.galleryImages?.[0] && (
-                                                <img
-                                                    src={project.galleryImages[0]}
-                                                    alt="Project Preview"
-                                                    className="absolute inset-0 w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-105"
-                                                />
-                                            )}
+
                                             <div className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/10 transition-colors duration-500">
                                                 <div className="flex flex-col items-center gap-4">
                                                     <button
@@ -561,16 +436,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700 ease-in-out" />
                         </button>
 
-                        {/* UI Gallery Button */}
-                        {project.galleryImages && (
-                            <button
-                                onClick={() => setShowGallery(true)}
-                                className="px-6 py-3 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-white font-medium transition-all flex items-center gap-2 group/gallery hover:border-[#C9B037]/50"
-                            >
-                                <ImageIcon size={18} className="group-hover/gallery:text-[#C9B037] transition-colors" />
-                                UI Gallery
-                            </button>
-                        )}
+
 
                         <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:bg-white hover:text-black hover:border-white transition-all transform hover:scale-110">
                             <ExternalLink size={20} />
@@ -584,7 +450,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
 
             <AnimatePresence>
                 {showDetail && <DetailModal project={project} onClose={() => setShowDetail(false)} />}
-                {showGallery && project.galleryImages && <GalleryModal images={project.galleryImages} title={project.title} onClose={() => setShowGallery(false)} />}
+
             </AnimatePresence>
         </>
     );
